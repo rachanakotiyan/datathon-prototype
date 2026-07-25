@@ -70,6 +70,7 @@ available_districts = sorted(df['district'].dropna().unique())
 
 print("5. Launching Web Server...")
 app = dash.Dash(__name__)
+server = app.server
 
 # THEME SETTINGS: Dark mode, Courier font, Red accents
 app.layout = html.Div(style={'fontFamily': 'Courier New, monospace', 'padding': '30px', 'backgroundColor': '#050505', 'color': '#e0e0e0', 'minHeight': '100vh'}, children=[
