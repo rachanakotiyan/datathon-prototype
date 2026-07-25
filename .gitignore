@@ -1,0 +1,10 @@
+# Ignore the massive datasets and databases
+*.csv
+*.db
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# (Optional) Ignore the AI brain files if they are over 50MB
+# *.pkl
