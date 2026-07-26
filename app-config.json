@@ -1,6 +1,0 @@
-{
-  "name": "dashboard_app",
-  "type": "app-sail",
-  "env": "python3.9",
-  "command": "sh -c 'gunicorn --bind 0.0.0.0:$X_ZOHO_CATALYST_LISTEN_PORT dashboard:server'"
-}
