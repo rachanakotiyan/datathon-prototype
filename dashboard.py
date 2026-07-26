@@ -197,8 +197,7 @@ import os
 server = app.server 
 
 if __name__ == '__main__':
-    # Use the port assigned by Catalyst (or 9000 for local testing).
-    # This only runs when you run 'python dashboard.py' locally
-    port = int(os.environ.get('X_ZOHO_CATALYST_LISTEN_PORT', 9000))
-    app.run_server(host='0.0.0.0', port=port, debug=False)
+    # You can just use the standard run_server. 
+    # Render's Gunicorn command will override this anyway.
+    app.run_server(debug=False)
 
