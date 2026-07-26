@@ -70,7 +70,7 @@ available_districts = sorted(df['district'].dropna().unique())
 
 print("5. Launching Web Server...")
 app = dash.Dash(__name__)
-server = app.server
+server = app.server  # <--- GUNICORN LOOKS FOR THIS EXACT VARIABLE
 
 # THEME SETTINGS: Dark mode, Courier font, Red accents
 app.layout = html.Div(style={'fontFamily': 'Courier New, monospace', 'padding': '30px', 'backgroundColor': '#050505', 'color': '#e0e0e0', 'minHeight': '100vh'}, children=[
@@ -188,5 +188,11 @@ def update_risk_prediction(district, hour):
     except Exception as e:
         return f"SYSTEM ERROR: {str(e)}"
 
+import os
+
+# ... [keep all your existing code above this] ...
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # This block is ignored by Gunicorn in the cloud, 
+    # but still lets you run the app locally on your computer.
+    app.run_server(debug=False, host='0.0.0.0', port=8050)
