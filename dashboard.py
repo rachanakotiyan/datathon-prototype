@@ -193,6 +193,6 @@ import os
 # ... [keep all your existing code above this] ...
 
 if __name__ == '__main__':
-    # This block is ignored by Gunicorn in the cloud, 
-    # but still lets you run the app locally on your computer.
-    app.run_server(debug=False, host='0.0.0.0', port=8050)
+    # Use the port assigned by Catalyst, or 9000 for local testing
+    port = int(os.environ.get('X_ZOHO_CATALYST_LISTEN_PORT', 9000))
+    app.run_server(host='0.0.0.0', port=port, debug=False)
