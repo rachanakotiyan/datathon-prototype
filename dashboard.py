@@ -170,9 +170,10 @@ def update_risk_prediction(district, hour):
         current_day = datetime.now().weekday()
         
         # Create a DataFrame with the exact column names the AI was trained on to fix the warning
+       # Inside your callback:
         input_data = pd.DataFrame(
-            [[hour, current_month, current_day, encoded_district]], 
-            columns=['hour', 'month', 'day_of_week', 'district_encoded']
+        [[avg_lat, avg_lon, hour, current_month, encoded_district]], 
+        columns=['latitude', 'longitude', 'hour', 'month', 'district_encoded']
         )
         
         # Ask the Random Forest model for a prediction
@@ -190,9 +191,14 @@ def update_risk_prediction(district, hour):
 
 import os
 
-# ... [keep all your existing code above this] ...
+# ... keep your app layout and callbacks ...
+
+# Gunicorn needs to see 'server' at the module level
+server = app.server 
 
 if __name__ == '__main__':
-    # Use the port assigned by Catalyst, or 9000 for local testing
+    # Use the port assigned by Catalyst (or 9000 for local testing).
+    # This only runs when you run 'python dashboard.py' locally
     port = int(os.environ.get('X_ZOHO_CATALYST_LISTEN_PORT', 9000))
     app.run_server(host='0.0.0.0', port=port, debug=False)
+
