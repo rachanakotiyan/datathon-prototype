@@ -190,9 +190,12 @@ def update_risk_prediction(district, hour):
 
 import os
 
-# ... [keep all your existing code above this] ...
+# ... keep your app layout and callbacks ...
+
+# Gunicorn needs to see 'server' at the module level
+server = app.server 
 
 if __name__ == '__main__':
-    # This block is ignored by Gunicorn in the cloud, 
-    # but still lets you run the app locally on your computer.
-    app.run_server(debug=False, host='0.0.0.0', port=8050)
+    # This only runs when you run 'python dashboard.py' locally
+    port = int(os.environ.get('X_ZOHO_CATALYST_LISTEN_PORT', 9000))
+    app.run_server(host='0.0.0.0', port=port, debug=False)
