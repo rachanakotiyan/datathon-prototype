@@ -1,8 +1,6 @@
 {
-	"command": "echo Please specify the start-up command in the app-config.json file under the key command for AppSail $X_ZC_RESOURCE_NAME",
-	"build_path": "./",
-	"stack": "python_3_9",
-	"env_variables": {},
-	"memory": 256,
-	"scripts": {}
+  "name": "dashboard_app",
+  "type": "app-sail",
+  "env": "python3.9",
+  "command": "sh -c 'gunicorn --bind 0.0.0.0:$X_ZOHO_CATALYST_LISTEN_PORT dashboard:server'"
 }
